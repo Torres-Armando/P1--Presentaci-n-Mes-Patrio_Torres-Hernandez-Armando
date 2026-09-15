@@ -12,7 +12,6 @@
       box-sizing: border-box;
     }
 
-    /* La página ocupa exactamente la ventana, sin scroll */
     html, body {
       height: 100%;
       overflow: hidden;
@@ -22,7 +21,6 @@
       background-color: #f9f9f9;
     }
 
-    /* Layout vertical fijo */
     body {
       display: flex;
       flex-direction: column;
@@ -47,7 +45,7 @@
       color: #d4f0e0;
     }
 
-    /* ===== BARRA DE NAVEGACIÓN ===== */
+    /*  BARRA DE NAVEGACIÓN  */
     nav {
       background-color: #ce1126;
       display: flex;
@@ -73,19 +71,18 @@
       font-weight: bold;
     }
 
-    /* ===== ÁREA DE CONTENIDO (ocupa el espacio que queda) ===== */
+    /* ===== ÁREA DE CONTENIDO  ===== */
     main {
       flex: 1;
-      overflow: hidden;        /* el main NO tiene scroll */
+      overflow: hidden;      
       position: relative;
     }
 
-    /* Cada sección ocupa todo el main y se oculta por defecto */
     .seccion {
       display: none;
       height: 100%;
       padding: 18px 40px;
-      overflow-y: auto;        /* si el contenido es largo, scroll interno */
+      overflow-y: auto;      
     }
 
     .seccion.visible {
@@ -209,7 +206,7 @@
   <!-- CUERPO PRINCIPAL -->
   <main>
 
-    <!-- SECCIÓN 1: Historia -->
+    <!-- Historia -->
     <div class="seccion visible" id="historia">
       <h2>Historia de la Independencia</h2>
       <p>
@@ -240,7 +237,7 @@
         </figure>
       </div>
 
-      <!-- INFORMACIÓN ADICIONAL AGREGADA -->
+      <!-- INFORMACIÓN ADICIONAL -->
       <p>
         Las causas de la Independencia fueron diversas. Entre ellas estuvieron las desigualdades
         sociales, los privilegios de los peninsulares, las dificultades económicas y el descontento
@@ -262,7 +259,7 @@
       </p>
     </div>
 
-    <!-- SECCIÓN 2: Personajes -->
+    <!-- Personajes -->
     <div class="seccion" id="personajes">
       <h2>Personajes Principales</h2>
       <p>Muchos hombres y mujeres participaron en la lucha por la independencia. Los más destacados fueron:</p>
@@ -275,7 +272,7 @@
         <li><span>Agustín de Iturbide</span> — Firmó el Plan de Iguala y consumó la independencia en 1821.</li>
       </ul>
 
-      <!-- INFORMACIÓN ADICIONAL AGREGADA -->
+      <!-- INFORMACIÓN ADICIONAL -->
       <p>
         Además de los personajes mencionados, participaron muchas otras personas que contribuyeron
         al movimiento insurgente. Entre ellas estuvieron Leona Vicario, quien apoyó a los insurgentes,
@@ -291,7 +288,7 @@
       </p>
     </div>
 
-    <!-- SECCIÓN 3: Fechas Clave -->
+    <!-- Fechas Clave -->
     <div class="seccion" id="fechas">
       <h2>Fechas Clave</h2>
       <p>A continuación se presentan los eventos más importantes del proceso de independencia:</p>
@@ -328,7 +325,7 @@
             <td>Consumación de la Independencia — Entrada del Ejército Trigarante a la CDMX</td>
           </tr>
 
-          <!-- FECHAS ADICIONALES AGREGADAS -->
+          <!-- FECHAS ADICIONALES -->
           <tr>
             <td>19 de septiembre de 1808</td>
             <td>Inicio de una importante crisis política en Nueva España relacionada con la situación de la monarquía española.</td>
@@ -353,7 +350,7 @@
       </table>
     </div>
 
-    <!-- SECCIÓN 4: Tradiciones -->
+    <!-- Tradiciones -->
     <div class="seccion" id="tradiciones">
       <h2>Tradiciones del Mes Patrio</h2>
       <p>
@@ -372,7 +369,7 @@
         en calles, escuelas y hogares.
       </p>
 
-      <!-- INFORMACIÓN ADICIONAL AGREGADA -->
+      <!-- INFORMACIÓN ADICIONAL -->
       <p>
         Durante estas fechas también es común que las familias se reúnan para compartir alimentos
         tradicionales y que las escuelas organicen actividades relacionadas con la historia de
@@ -393,7 +390,7 @@
       </p>
     </div>
 
-    <!-- SECCIÓN 5: Galería -->
+    <!-- Galería -->
     <div class="seccion" id="galeria">
       <h2>Galería</h2>
       <div class="img-bloque">
@@ -411,7 +408,7 @@
         </figure>
       </div>
 
-      <!-- INFORMACIÓN ADICIONAL AGREGADA -->
+      <!-- INFORMACIÓN ADICIONAL -->
       <p>
         Las imágenes de esta galería representan diferentes elementos relacionados con la historia
         y la identidad de México. El Ángel de la Independencia es uno de los monumentos más
@@ -430,25 +427,20 @@
     <p style="margin-top: 4px; font-size: 0.8em; color: #aaa;">Instituto Tecnológico — Septiembre 2026</p>
   </footer>
 
-  <!-- JAVASCRIPT: cambia secciones sin scroll -->
   <script>
     function mostrar(id) {
-      // Ocultar todas las secciones
       var secciones = document.querySelectorAll('.seccion');
       secciones.forEach(function(s) {
         s.classList.remove('visible');
       });
 
-      // Quitar clase activo de todos los tabs
       var tabs = document.querySelectorAll('nav a');
       tabs.forEach(function(t) {
         t.classList.remove('activo');
       });
 
-      // Mostrar la sección seleccionada
       document.getElementById(id).classList.add('visible');
 
-      // Marcar el tab activo
       document.getElementById('tab-' + id).classList.add('activo');
     }
   </script>
