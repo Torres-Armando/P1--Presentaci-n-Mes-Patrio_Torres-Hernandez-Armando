@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mi Ciudad - Ciudad Juárez</title>
+<style>
+  /* Colores principales del sitio */
+  :root { --fondo:#faf7f2; --texto:#2b2b2b; --gris:#6b6b6b; --azul:#1f3a5f; --azul-osc:#14253d; --terra:#c0562b; --borde:#e3ddd3; --tarjeta:#fff; --suave:#efe9de; --g1:#fbeede; --g2:#e8f0e4; --foco:#1f6fd1; --sombra:0 2px 12px rgba(0,0,0,.07); --sombra-h:0 12px 28px rgba(0,0,0,.14); --cifra:#1f3a5f; box-sizing:border-box; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --fondo:#15171a; --texto:#ece8e1; --gris:#a7a39b; --borde:#33363b; --tarjeta:#1f2226; --suave:#2a2d32; --g1:#3a2c20; --g2:#25332a; --foco:#6aa8ff; --sombra:0 2px 12px rgba(0,0,0,.4); --sombra-h:0 12px 28px rgba(0,0,0,.6); --cifra:#8fb4e8; } }
+  :root[data-theme="dark"] { --fondo:#15171a; --texto:#ece8e1; --gris:#a7a39b; --borde:#33363b; --tarjeta:#1f2226; --suave:#2a2d32; --g1:#3a2c20; --g2:#25332a; --foco:#6aa8ff; --sombra:0 2px 12px rgba(0,0,0,.4); --sombra-h:0 12px 28px rgba(0,0,0,.6); --cifra:#8fb4e8; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px); }
+  body { margin:0; font-family:system-ui,"Segoe UI",Roboto,Arial,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.6; }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline:3px solid var(--foco); outline-offset:2px; }
+  /* Encabezado */
+  header { background:linear-gradient(135deg,var(--azul),var(--azul-osc)); color:#fff; text-align:center; padding:calc(env(safe-area-inset-top,0px) + 72px) 20px 64px; }
+  header h1 { margin:0; font-size:clamp(2rem,6vw,3.2rem); font-weight:700; letter-spacing:-.02em; line-height:1.15; }
+  /* Barra de navegación fija y translúcida */
+  nav { position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:rgba(20,37,61,.88); -webkit-backdrop-filter:saturate(160%) blur(12px); backdrop-filter:saturate(160%) blur(12px); text-align:center; padding:8px; }
+  nav a { display:inline-block; color:#fff; text-decoration:none; margin:2px 3px; padding:7px 14px; font-size:.92rem; border-radius:980px; transition:background .2s; }
+  nav a:hover { background:rgba(255,255,255,.18); }
+  nav a.destacado { background:var(--terra); font-weight:600; }
+  nav a.destacado:hover { background:#d4623a; }
+  /* Contenido central */
+  .wrap { max-width:960px; margin:auto; padding:0 20px; }
+  section { padding:56px 0 8px; }
+  .etiqueta { display:block; color:var(--terra); font-size:.75rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; margin-bottom:4px; }
+  h2 { font-size:1.9rem; font-weight:700; letter-spacing:-.01em; line-height:1.2; margin:0 0 14px; }
+  h3 { font-weight:700; margin:0 0 6px; }
+  p { margin:0 0 14px; }
+  /* Imagen de inicio */
+  .foto { display:block; margin:22px auto 0; width:400px; max-width:100%; min-height:200px; border-radius:18px; box-shadow:var(--sombra); background:linear-gradient(135deg,var(--suave),var(--g1)); color:var(--gris); font-size:.9rem; text-align:center; object-fit:cover; }
+  /* Datos destacados */
+  .datos { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-top:32px; }
+  .dato { background:var(--tarjeta); border-radius:16px; box-shadow:var(--sombra); padding:18px; text-align:center; }
+  .dato strong { display:block; font-size:1.7rem; color:var(--cifra); line-height:1.2; }
+  .dato span { color:var(--gris); font-size:.9rem; }
+  /* Etiquetas de historia */
+  .pildoras { display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+  .pildoras span { background:var(--suave); padding:5px 14px; border-radius:980px; font-size:.85rem; }
+  /* Tarjetas */
+  .rejilla { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-top:20px; }
+  .tarjeta { background:var(--tarjeta); border-radius:18px; box-shadow:var(--sombra); padding:20px; transition:transform .2s, box-shadow .2s; }
+  .tarjeta:hover { transform:translateY(-4px); box-shadow:var(--sombra-h); }
+  .tarjeta p { color:var(--gris); font-size:.93rem; margin:0; }
+  .num { display:flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%; background:var(--terra); color:#fff; font-weight:700; margin-bottom:12px; }
+  .sabor.a { background:var(--g1); } .sabor.b { background:var(--g2); }
+  .sabor h3 { font-size:1.3rem; margin:0; }
+  /* Formulario en tarjeta grande */
+  .form-card { background:var(--tarjeta); border-radius:20px; box-shadow:var(--sombra); padding:32px 24px; }
+  .form-card h3.sub { font-size:1.15rem; }
+  .form-card .intro { color:var(--gris); }
+  .campos { display:grid; grid-template-columns:1fr 1fr; gap:4px 16px; }
+  .campos .completo { grid-column:1 / -1; }
+  label { display:block; font-size:.9rem; font-weight:600; margin:12px 0 4px; }
+  input[type=text], input[type=email], input[type=tel], select, textarea { display:block; width:100%; padding:11px 12px; border:1px solid var(--borde); border-radius:10px; font:inherit; background:var(--tarjeta); color:var(--texto); transition:border-color .2s, box-shadow .2s; }
+  input:focus, select:focus, textarea:focus { outline:none; border-color:var(--azul); box-shadow:0 0 0 4px rgba(31,58,95,.2); }
+  .botones { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+  .btn { border:none; border-radius:980px; padding:12px 26px; font:inherit; font-weight:600; cursor:pointer; background:var(--terra); color:#fff; transition:background .2s, transform .2s; }
+  .btn:hover { background:#d4623a; transform:translateY(-1px); }
+  .btn-sec { background:var(--suave); color:var(--texto); }
+  .btn-sec:hover { background:var(--borde); }
+  /* Mensaje de gracias: el formulario solo simula el envío, no se manda ningún dato */
+  #gracias { display:none; color:#1a7f37; font-weight:600; margin:16px 0 0; }
+  #gracias:target { display:block; }
+  /* Pie de página */
+  footer { text-align:center; color:var(--gris); font-size:.9rem; padding:40px 20px calc(40px + env(safe-area-inset-bottom,0px)); margin-top:56px; border-top:1px solid var(--borde); }
+  footer p { margin:0; }
+  /* Botón volver arriba */
+  .arriba { position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom,0px)); width:44px; height:44px; border-radius:50%; background:var(--terra); color:#fff; text-decoration:none; display:flex; align-items:center; justify-content:center; font-size:1.3rem; box-shadow:var(--sombra-h); z-index:4; transition:transform .2s; }
+  .arriba:hover { transform:translateY(-3px); }
+  @media (max-width:640px) { .campos { grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } * { transition:none !important; } }
+</style>
+</head>
+<body>
+
+<!-- ENCABEZADO -->
+<header id="inicio-top">
+  <h1>Mi Ciudad: Ciudad Juárez</h1>
+</header>
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav>
+  <a href="#inicio">Inicio</a>
+  <a href="#historia">Historia</a>
+  <a href="#lugares">Lugares Turísticos</a>
+  <a href="#gastronomia">Gastronomía</a>
+  <a class="destacado" href="#contacto">Formulario de Contacto</a>
+</nav>
+
+<main>
+  <!-- INICIO -->
+  <section id="inicio"><div class="wrap">
+    <span class="etiqueta">Bienvenido</span>
+    <h2>Bienvenido a Ciudad Juárez</h2>
+    <p>Ciudad Juárez es una de las ciudades más importantes del estado de Chihuahua, México. Ubicada en la frontera con Estados Unidos, justo al lado de El Paso, Texas, es reconocida por su dinamismo industrial, su rica cultura fronteriza y su cálida hospitalidad.</p>
+    <img class="foto" src="La x.jpg" alt="Vista de la ciudad" width="400">
+
+    <!-- Datos destacados -->
+    <div class="datos">
+      <div class="dato"><strong>Siglo XVII</strong><span>Fundada como Paso del Norte</span></div>
+      <div class="dato"><strong>1659</strong><span>Fundación de la Misión de Guadalupe</span></div>
+      <div class="dato"><strong>Frontera</strong><span>Junto a El Paso, Texas</span></div>
+    </div>
+  </div></section>
+
+  <!-- HISTORIA -->
+  <section id="historia"><div class="wrap">
+    <span class="etiqueta">Historia</span>
+    <h2>Historia y Cultura</h2>
+    <p>Fundada originalmente en el siglo XVII como Paso del Norte, la ciudad tomó el nombre de Ciudad Juárez en honor a Benito Juárez, quien estableció allí la sede de su gobierno durante la intervención francesa. Es conocida también como la cuna del famoso cantautor Juan Gabriel.</p>
+    <div class="pildoras"><span>Paso del Norte</span><span>Benito Juárez</span><span>Juan Gabriel</span></div>
+  </div></section>
+
+  <!-- LUGARES -->
+  <section id="lugares"><div class="wrap">
+    <span class="etiqueta">Explora</span>
+    <h2>Lugares Turísticos y Emblemáticos</h2>
+    <div class="rejilla">
+      <div class="tarjeta"><div class="num">1</div><h3>La X (Plaza de la Hispanidad)</h3><p>Impresionante monumento icónico ubicado en la plaza frente al Río Bravo.</p></div>
+      <div class="tarjeta"><div class="num">2</div><h3>Dunas de Samalayuca</h3><p>Extenso desierto de arena blanca ideal para actividades al aire libre y deportes de aventura.</p></div>
+      <div class="tarjeta"><div class="num">3</div><h3>Misión de Guadalupe</h3><p>La construcción más antigua de la ciudad, fundada en 1659.</p></div>
+      <div class="tarjeta"><div class="num">4</div><h3>Catedral de Ciudad Juárez</h3><p>Hermoso templo ubicado en el centro histórico de la ciudad.</p></div>
+    </div>
+  </div></section>
+
+  <!-- GASTRONOMÍA -->
+  <section id="gastronomia"><div class="wrap">
+    <span class="etiqueta">Sabores</span>
+    <h2>Gastronomía Local</h2>
+    <p>Ciudad Juárez es famosa por ser la cuna de la <strong>Margarita</strong> y los tradicionales <strong>Burritos</strong>, un platillo emblemático que forma parte de la identidad juarense.</p>
+    <div class="rejilla">
+      <div class="tarjeta sabor a"><h3>Margarita</h3></div>
+      <div class="tarjeta sabor b"><h3>Burritos</h3></div>
+    </div>
+  </div></section>
+
+  <!-- CONTACTO: formulario de atención ciudadana -->
+  <section id="contacto"><div class="wrap">
+    <div class="form-card">
+      <span class="etiqueta">Escríbenos</span>
+      <h2>Formulario de Atención Ciudadana - Ciudad Juárez</h2>
+      <h3 class="sub">Envía tus comentarios o reporte ciudadano</h3>
+      <p class="intro">Por favor llena los siguientes datos para contactar a la administración municipal de Ciudad Juárez.</p>
+
+      <form action="#gracias" method="post">
+        <div class="campos">
+          <div>
+            <label for="nombre">Nombre completo:</label>
+            <input type="text" id="nombre" name="nombre" required>
+          </div>
+          <div>
+            <label for="correo">Correo electrónico:</label>
+            <input type="email" id="correo" name="correo" required>
+          </div>
+          <div>
+            <label for="telefono">Teléfono de contacto:</label>
+            <input type="tel" id="telefono" name="telefono">
+          </div>
+          <div>
+            <label for="asunto">Tipo de reporte o trámite:</label>
+            <select id="asunto" name="asunto">
+              <option value="reporte">Reporte de servicios públicos (alumbrado, bacheo)</option>
+              <option value="sugerencia">Sugerencia o comentario</option>
+              <option value="informacion">Solicitud de información turística</option>
+              <option value="otro">Otro asunto</option>
+            </select>
+          </div>
+          <div class="completo">
+            <label for="mensaje">Mensaje o descripción del reporte:</label>
+            <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+          </div>
+        </div>
+        <div class="botones">
+          <input class="btn" type="submit" value="Enviar Reporte">
+          <input class="btn btn-sec" type="reset" value="Limpiar Formulario">
+        </div>
+        <p id="gracias">¡Gracias! Tu mensaje fue recibido por la administración municipal.</p>
+      </form>
+    </div>
+  </div></section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p>Torres Hernandez Armando 0901 5°J</p>
+</footer>
+
+<!-- Botón volver arriba -->
+<a class="arriba" href="#inicio-top" aria-label="Volver arriba">↑</a>
+
+</body>
+</html>
