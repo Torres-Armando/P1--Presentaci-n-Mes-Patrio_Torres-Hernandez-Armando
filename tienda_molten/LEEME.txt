@@ -1,0 +1,12 @@
+TIENDA MOLTEN - COMO ABRIRLA
+
+1. Abre XAMPP y enciende Apache y MySQL.
+2. Copia la carpeta "tienda_molten" a C:\xampp\htdocs\
+3. Entra a http://localhost/phpmyadmin, pestana "Importar", y sube en orden:
+      base_de_datos/01_crear_base.sql
+      base_de_datos/02_tablas.sql
+      base_de_datos/03_datos.sql
+   (si ya tenias una tabla "usuarios" de antes, lee el comentario al inicio de 02_tablas.sql)
+4. Abre http://localhost/tienda_molten/
+
+Primero crea tu cuenta en "Registro", luego inicia sesion y agrega balones al carrito.
